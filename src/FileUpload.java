@@ -6,10 +6,12 @@ import java.util.List;
 
 public class FileUpload extends FormDataHandler{
     @Override
-    public void handle(HttpExchange httpExchange, List<MultiPart> parts) {
+    public void handle(HttpExchange httpExchange, List<MultiPart> parts) throws IOException {
         final String ROOT_PATH = "C:\\Users\\lsmn0\\Documents\\LSM\\TestServer";
         String resource = httpExchange.getRequestURI().toString();
         System.out.println(parts.size());
+
+        httpExchange.sendResponseHeaders(200, 0);
 
         for (int i = 0; i < parts.size(); i++) {
             // Multipart/form-data 저장
@@ -26,8 +28,6 @@ public class FileUpload extends FormDataHandler{
                 FileOutputStream fos = new FileOutputStream(new File(ROOT_PATH + resource + File.separator + parts.get(i).filename));
                 fos.write(parts.get(i).bytes);
                 fos.close();
-
-                httpExchange.sendResponseHeaders(200, 0);
             } catch (IOException e) {
                 e.printStackTrace();
             }

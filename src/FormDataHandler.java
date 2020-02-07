@@ -19,6 +19,7 @@ public abstract class FormDataHandler implements HttpHandler {
         final String ROOT_PATH = "C:\\Users\\lsmn0\\Documents\\LSM\\TestServer";
 
         if (requestMethod.equalsIgnoreCase("GET")) {
+            System.out.println("GET");
             if (resource.equals("/")) {
                 Headers responseHeaders = httpExchange.getResponseHeaders();
                 responseHeaders.set("Content-Type", "text/plain");
@@ -37,7 +38,7 @@ public abstract class FormDataHandler implements HttpHandler {
                 responseBody.close();
             } else {
                 Headers responseHeaders = httpExchange.getResponseHeaders();
-                responseHeaders.set("Content-Type", "text/plain");
+//                responseHeaders.set("Content-Type", "text/plain");
                 URI uri = httpExchange.getRequestURI();
                 System.out.println(uri.getPath());
                 OutputStream responseBody = httpExchange.getResponseBody();
